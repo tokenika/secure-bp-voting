@@ -1,0 +1,93 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://github.com/EOSIO/eosjs/releases/download/v13.0.0/eos.js"></script>
+  <script>
+
+  function generate_transaction(){
+      let account_name = document.getElementById('account_name').value;
+      let private_key = document.getElementById('private_key').value;
+      let block_producer = document.getElementById('bp').value;
+
+      let expireInSeconds = 60*document.getElementById('minutes_before_expiration').value;
+      let block_num = +document.getElementById('block_num').value;
+      let ref_block_num = block_num & 0xFFFF;
+      let ref_block_prefix = +document.getElementById('ref_block_prefix').value;
+
+      producers = [block_producer];
+
+      eos = Eos.Localnet(
+          {
+              keyProvider: private_key,
+              transactionHeaders: function(_, callback) {
+                  callback(null, /*headers*/ {
+                      ref_block_num: ref_block_num,
+                      ref_block_prefix: ref_block_prefix,
+                      expiration: new Date(new Date().getTime() + expireInSeconds * 1000).toISOString().split('.')[0],
+                      net_usage_words: 0,
+                      max_cpu_usage_ms: 0,
+                      delay_sec: 0
+
+                  })
+              },
+          }
+      );
+
+      eos.transaction(
+          function(tr){
+              tr.voteproducer({'voter': account_name, 'proxy': '', 'producers': producers})
+          },
+          {
+              broadcast: false,
+              sign: true,
+              authorization: account_name
+          }
+      ).then(result => {
+          let raw_transaction = JSON.stringify(result['transaction'], null, "    ");
+          console.log("----------------------");
+          console.log(result);
+          console.log("----------------------");
+          console.log(raw_transaction);
+          console.log("----------------------");
+
+          document.getElementById('raw_transaction').value = raw_transaction;
+
+      });
+  }
+
+  </script>
+</head>
+<body>
+
+<h1>Generate your voting transactions being offline, without a risk of exposing your private key</h1>
+
+<p>
+
+</p>
+
+<form action="javascript:generate_transaction()">
+  <label for="account_name">Your Account Name</label>
+  <input type="text" name="account_name" id="account_name" value="" required><br>
+
+  <label for="private_key">Private Key</label>
+  <input type="text" name="private_key" id="private_key" value="" required><br>
+
+  <label for="bp">Block Producer</label>
+  <input type="text" name="bp" id="bp" value="" required><br>
+
+  <label for="block_num">block_num</label>
+  <input type="text" name="block_num" id="block_num" value="" required><br>
+
+  <label for="ref_block_prefix">ref_block_prefix</label>
+  <input type="text" name="ref_block_prefix" id="ref_block_prefix" value="" required><br>
+
+  <label for="minutes_before_expiration">How many minutes before expiration</label>
+  <input type="text" name="minutes_before_expiration" id="minutes_before_expiration" value="10" required><br>
+
+  <input type="submit" value="Generate transaction">
+</form>
+
+  <textarea id="raw_transaction" style="width: 1000px; height: 600px"></textarea>
+
+</body>
+</html>
