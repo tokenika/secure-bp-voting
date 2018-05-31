@@ -1,7 +1,40 @@
-<h1>Secure Block Producers Voting</h1>
+<html>
+<head>
+    <meta charset="utf-8">
 
-<ol>
-    <li><a href="get_blockchain_data.html">Fetch information from the network</a></li>
-    <li><a href="generate_transaction.html">Generate and sign transaction</a> (you can do this offline!)</li>
-    <li><a href="push_transaction.html">Push transaction</a></li>
-</ol>
+</head>
+<body>
+    <h1>Secure EOS Block Producers Voting</h1>
+
+    <h3>Single Page Voting</h3>
+
+    <p>Much simpler way to vote, but if your computer was infected by some virus/keylogger in the past, this way cannot guarantee full security.</p>
+
+    <ol>
+        <li><a href="1_vote.html">Simple voting for block producers</a></li>
+    </ol>
+
+    <h3>More secure voting, without a need to use your private key on device being online</h3>
+
+    <p>This way is more complicated, but it gives you maximum security. The process is divided into 3 steps:</p>
+
+    <ol>
+        <li><a href="1_get_blockchain_data.html">Fetching information about the network</a></li>
+        <li><a href="2_generate_transaction.html">Generating and signing transaction with your private key</a> (you can do this offline, for example with a computer which was never connected to the internet)</li>
+        <li><a href="3_push_transaction.html">Pushing transaction to the network</a></li>
+    </ol>
+
+    <hr>
+
+    <p>Both solutions are based on <a href="https://github.com/eosio/eosjs">eosjs library</a>.</p>
+    <p><em>Secure EOS Block Producers Voting</em> is an open-source software created by <a href="https://tokenika.io/">Tokenika.io</a> - an EOS block producer candidate.</p>
+
+    <p>
+        Source code is available at <a href="https://github.com/tokenika/secure-bp-voting">https://github.com/tokenika/secure-bp-voting</a> on <a href="https://raw.githubusercontent.com/tokenika/secure-bp-voting/master/LICENSE">MIT Licence</a>.
+    </p>
+
+    <p>
+        <b>We encourage EOS community to audit our code or improve!</b>
+    </p>
+</body>
+</html>

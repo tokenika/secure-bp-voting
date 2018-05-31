@@ -1,0 +1,149 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<script src="https://github.com/EOSIO/eosjs/releases/download/v13.0.0/eos.js"></script>-->
+    <!--
+        Last bundle which was released on github (13.0.0) generates invalid signatures.
+        Version used here was build according to official instructions: https://github.com/EOSIO/eosjs#browser
+
+            git clone https://github.com/EOSIO/eosjs.git
+            cd eosjs
+            npm install
+            npm run build_browser
+
+        If you have any doubts about this eos.js file, replace it with eos.js file build on your own, or
+        help convince guys from EOS.IO to release 13.0.1 in form of bundle, with js version ready to use.
+    -->
+    <script src="eos.js"></script>
+
+    <script>
+        function handle_error(error) {
+            document.getElementById('response').style.display = 'block';
+            document.getElementById('status').innerText = 'ERROR';
+            document.getElementById('result').innerText = error.message;
+        }
+
+        function load() {
+            let api_endpoint = document.getElementById('api_endpoint').value;
+
+            api_endpoint = api_endpoint.replace(/\/$/, ""); //remove trailing slash
+
+            eos = Eos.Localnet({httpEndpoint: api_endpoint});
+
+            eos.getInfo({}).then(function(result){
+                document.getElementById('loaded_info').style.display = 'block';
+                document.getElementById('network_info').innerText = JSON.stringify(result, null, "    ");
+                document.getElementById('fieldset').disabled = false;
+            });
+        }
+
+        function vote(){
+            let api_endpoint = document.getElementById('api_endpoint').value;
+            api_endpoint = api_endpoint.replace(/\/$/, ""); //remove trailing slash
+
+            let account_name = document.getElementById('account_name').value;
+            let private_key = document.getElementById('private_key').value;
+            let block_producers = document.getElementById('bp').value;
+            block_producers = block_producers.split(',').map(function(s){return s.trim();});
+
+            let options = {
+                broadcast: true,
+                sign: true,
+                authorization: account_name
+            };
+
+            Eos.Localnet({
+                httpEndpoint: api_endpoint,
+                keyProvider: private_key,
+            })
+            .transaction(
+                function(tr){
+                    tr.voteproducer({
+                        'voter': account_name,
+                        'proxy': '',
+                        'producers': block_producers
+                    })
+                },
+                options,
+                function (a, b){
+                    alert(a);
+                    alert(b);
+
+                }
+            )
+            .then(
+                function(result, r2){
+                    document.getElementById('transaction').style.display = 'block';
+                    document.getElementById('raw_transaction').innerText = JSON.stringify(result, null, "    ");
+                },
+                handle_error
+            );
+        }
+
+    </script>
+    <style>
+        fieldset {
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vote online</h1>
+    <h3>Step 1. Load info about the network</h3>
+
+    <form action="javascript:load()">
+        <label for="api_endpoint">API Endpoint</label>
+        <input type="text" name="api_endpoint" id="api_endpoint" value="" placeholder="http://<adres>:<port>" style="width: 300px;" required>
+        <input type="submit" value="Load">
+    </form>
+
+    <div id="loaded_info" style="display: none;">
+        <pre id="network_info" style="font-size: 0.7em"></pre>
+        <p>
+            Check if this API Endpoint supports a chain, on which you want to vote, by comparing value of <var>chain_id</var>.
+        </p>
+
+        <hr>
+    </div>
+
+    <h3>Step 2. Vote for block producers</h3>
+    <form action="javascript:1()">
+        <fieldset id="fieldset" disabled>
+            <label for="account_name">Your Account Name</label>
+            <input type="text" name="account_name" id="account_name" value="" required><br/>
+
+            <label for="private_key">Private Key</label>
+            <input type="text" name="private_key" id="private_key" value="" style="width: 700px;" required><br>
+
+            <label for="bp">Block Producers</label>
+            <input type="text" name="bp" id="bp" value="" style="width: 700px;" placeholder="Coma separated list of block producers account names (no more than 30). Example: alpha, beta, gamma" required><br>
+
+            <input type="submit" value="Vote">
+        </fieldset>
+    </form>
+
+    <div id="response" style="display: none">
+        Status: <span id="status"></span><br>
+
+        <label for="result">Response:</label><br>
+
+        <div style="width: 1000px; overflow: auto;">
+            <code>
+                <pre id="result" style="font-size: 0.7em;"></pre>
+            </code>
+        </div>
+    </div>
+
+    <div id="transaction" style="display: none">
+        <div>Generated and signed <var>raw transaction</var>:</div>
+        <div style="width: 1000px; overflow: auto;">
+            <code>
+                <pre id="raw_transaction" style="font-size: 0.7em;"></pre>
+            </code>
+        </div>
+    </div>
+
+</body>
+</html>
