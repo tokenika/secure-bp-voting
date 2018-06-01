@@ -41,32 +41,6 @@
 
     <hr>
 
-    <h3>How to build eos.js on your own</h3>
-
-    <p>First and second solutions are based on <a href="https://github.com/eosio/eosjs">eosjs library</a>.<br><br>
-        Our plan was, to not include <var>eos.js</var> in our repository and just use a version 13.0.0:<br><br>
-        <code><pre>    &lt;script src="https://github.com/EOSIO/eosjs/releases/download/v13.0.0/eos.js"&gt;&lt;/script&gt;</pre></code><br>
-        which was released in official repository <a href="https://github.com/EOSIO/eosjs/releases/tag/v13.0.0">here</a>. Thanks to that you would not have to trust our eos.js file.<br><br>
-        However the problem appeared when Block One decided to release new version of eos.js (13.1.0), without uploading new build version of eos.js to <a href="https://github.com/EOSIO/eosjs/releases/tag/v13.1.0" target="_blank">released bundle</a> :(<br><br>
-        So, we <a href="https://github.com/EOSIO/eosjs/issues/153" target="_blank">created an issue on official github</a> hopping that they will build and upload newest trusted version of eos.js, so every developer would be able hot-link to it.<br/><br/>
-        But in the meantime, we have been forced to build latest eos.js on our own, so we could publish our solution.
-    </p>
-
-    <p>
-        <b>Important</b>: there is no requirement for your, to trust <var>eos.js</var> build by us. We encourage you, to build it on your own, according to <a href="https://github.com/EOSIO/eosjs#browser" target="_blank">provided official instruction</a>:<br/><br/>
-        <code>
-            <pre>
-    git clone https://github.com/EOSIO/eosjs.git
-    cd eosjs
-    npm install
-    npm run build_browser
-    # builds: ./dist/eos.js
-            </pre>
-        </code>
-    </p>
-
-    <hr>
-
     <h3>About</h3>
 
     <p><em>Secure EOS Block Producers Voting</em> is an open-source software created by <a href="https://tokenika.io/" target="_blank">Tokenika.io</a> - an EOS block producer candidate.</p>
