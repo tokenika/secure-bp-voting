@@ -1,7 +1,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!--<script src="https://github.com/EOSIO/eosjs/releases/download/v13.0.0/eos.js"></script>-->
     <!--
         Last bundle which was released on github (13.0.0) generates invalid signatures.
@@ -37,7 +36,7 @@
                 document.getElementById('loaded_info').style.display = 'block';
                 document.getElementById('network_info').innerText = JSON.stringify(result, null, "    ");
                 document.getElementById('fieldset').disabled = false;
-            });
+            }, handle_error);
         }
 
         function vote(){
@@ -67,22 +66,22 @@
                         'producers': block_producers
                     })
                 },
-                options,
-                function (a, b){
-                    alert(a);
-                    alert(b);
-
-                }
+                options
             )
             .then(
-                function(result, r2){
+                function(result){
                     document.getElementById('transaction').style.display = 'block';
                     document.getElementById('raw_transaction').innerText = JSON.stringify(result, null, "    ");
                 },
                 handle_error
             );
         }
-
+        document.addEventListener('DOMContentLoaded', function () {
+            if (location.protocol == 'https:') { // Enforce https if served from https, to avoid "mixed content" error
+                document.getElementById('api_endpoint').pattern = '^https://.*';
+                document.getElementById('api_endpoint').title = 'API needs to support https protocol';
+            }
+        });
     </script>
     <style>
         fieldset {
@@ -98,7 +97,13 @@
 
     <form action="javascript:load()">
         <label for="api_endpoint">API Endpoint</label>
-        <input type="text" name="api_endpoint" id="api_endpoint" value="" placeholder="http://<adres>:<port>" style="width: 300px;" required>
+
+        <input type="url" name="api_endpoint" id="api_endpoint" value="" list="defaultURLs" style="width: 300px;" required>
+
+        <datalist id="defaultURLs">
+            <option value="https://example.com" label="chain_id:0000000000000000000000000000000000000000000000000000000000000000">
+        </datalist>
+
         <input type="submit" value="Load">
     </form>
 

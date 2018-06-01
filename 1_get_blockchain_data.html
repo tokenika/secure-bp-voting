@@ -21,6 +21,9 @@
     <script src="eos.js"></script>
 
     <script>
+        function handle_error(error) {
+            document.getElementById('load_info_status').innerText = error.message;
+        }
 
         function load() {
             let api_endpoint = document.getElementById('api_endpoint').value;
@@ -40,9 +43,15 @@
                         document.getElementById('ref_block_prefix').value = result.ref_block_prefix;
                     }
                 )
-            });
+            }, handle_error);
         }
 
+        document.addEventListener('DOMContentLoaded', function () {
+            if (location.protocol == 'https:') { // Enforce https if served from https, to avoid "mixed content" error
+                document.getElementById('api_endpoint').pattern = '^https://.*';
+                document.getElementById('api_endpoint').title = 'API needs to support https protocol';
+            }
+        });
     </script>
 </head>
 <body>
@@ -51,9 +60,14 @@
 
     <form action="javascript:load()">
         <label for="api_endpoint">API Endpoint</label>
-        <input type="text" name="api_endpoint" id="api_endpoint" value="" placeholder="http://<adres>:<port>" style="width: 300px;" required>
+        <input type="url" name="api_endpoint" id="api_endpoint" value="" list="defaultURLs" style="width: 300px;" required>
+
+        <datalist id="defaultURLs">
+            <option value="https://example.com" label="chain_id:0000000000000000000000000000000000000000000000000000000000000000">
+        </datalist>
         <input type="submit" value="Load">
     </form>
+    <div id="load_info_status"></div>
     <div id="loaded_info" style="display: none;">
         <pre id="network_info" style="font-size: 0.7em"></pre>
         <p>

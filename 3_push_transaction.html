@@ -49,7 +49,12 @@
               handle_error(error);
           }
       }
-
+      document.addEventListener('DOMContentLoaded', function () {
+          if (location.protocol == 'https:') { // Enforce https if served from https, to avoid "mixed content" error
+              document.getElementById('api_endpoint').pattern = '^https://.*';
+              document.getElementById('api_endpoint').title = 'API needs to support https protocol';
+          }
+      });
   </script>
   <style>
     input, textarea {
@@ -63,7 +68,12 @@
 
     <form action="javascript:send()">
         <label for="api_endpoint">API Endpoint</label>
-        <input type="text" name="api_endpoint" id="api_endpoint" value="" placeholder="http://<adres>:<port>" style="width: 300px;" required><br>
+        <input type="url" name="api_endpoint" id="api_endpoint" value="" list="defaultURLs" style="width: 300px;" required>
+
+        <datalist id="defaultURLs">
+            <option value="https://example.com" label="chain_id:0000000000000000000000000000000000000000000000000000000000000000">
+        </datalist>
+        <br>
 
         <label for="api_endpoint"><var>Raw transaction</var></label><br>
         <textarea id="raw_transaction" style="width: 1000px; height: 400px; font-size: 0.7em" required></textarea><br/>
