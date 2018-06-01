@@ -28,6 +28,7 @@
 
       function send() {
           let api_endpoint = document.getElementById('api_endpoint').value;
+          api_endpoint = api_endpoint.replace(/\/$/, ""); //remove trailing slash
           let raw_transaction = document.getElementById('raw_transaction').value;
 
           try {
