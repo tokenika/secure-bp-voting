@@ -12,8 +12,8 @@ Much simpler way to vote, but if your computer was infected by some virus/keylog
 
 This way is more complicated, but it gives you maximum security. The process is divided into 3 steps:
 
-1. [Fetching information about the network](https://tokenika.github.io/secure-bp-voting/1_vote.html)
-2. [Generating and signing transaction with your private key](https://tokenika.github.io/secure-bp-voting/1_get_blockchain_data.html) (you can do this offline, for example with a computer which was never connected to the internet)
+1. [Fetching information about the network](https://tokenika.github.io/secure-bp-voting/1_get_blockchain_data.html)
+2. [Generating and signing transaction with your private key](https://tokenika.github.io/secure-bp-voting/2_generate_transaction.html) (you can do this offline, for example with a computer which was never connected to the internet)
 3. [Pushing transaction to the network](https://tokenika.github.io/secure-bp-voting/3_push_transaction.html)
 
 Both solutions are based on [eosjs library](https://github.com/eosio/eosjs).
