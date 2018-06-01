@@ -13,8 +13,6 @@
         That's why Tokenika decided to release a tool, to give people a possibility to vote being OFFLINE, with no risk of exposing your private keys.
     </p>
 
-    <p>But remember, you should not trust us, you should verify whather what we are saying is true</p>
-
     <h3>Simple online voting (not recommended)</h3>
 
     <p>Very simpler way to vote, but if your computer was infected by some virus/keylogger in the past, this way cannot guarantee full security.</p>
@@ -38,16 +36,43 @@
     <h3>Voting Using the Command Line (for advanced users)</h3>
 
     <p>
-        Of course, there is also a way, to vote with tools provided by Block One. The easiest way to do that require installation of docker. EOS New York recently published very good and detail instruction how this can be done. We can recommend <a href="https://steemit.com/eos/@eosnewyork/your-vote-matters-3-eos-block-producer-voting-using-the-command-line">their article</a> to all people, which know how to use docker and have some basic command line skils.
+        Of course, there is also a way, to vote with tools provided by Block One. The easiest way to do that require installation of docker. EOS New York recently published very good and detail instruction how this can be done. We can recommend <a href="https://steemit.com/eos/@eosnewyork/your-vote-matters-3-eos-block-producer-voting-using-the-command-line" target="_blank">their article</a> to all people, which know how to use docker and have some basic command line skills.
     </p>
 
     <hr>
 
-    <p>First and second solutions are based on <a href="https://github.com/eosio/eosjs">eosjs library</a>.</p>
-    <p><em>Secure EOS Block Producers Voting</em> is an open-source software created by <a href="https://tokenika.io/">Tokenika.io</a> - an EOS block producer candidate.</p>
+    <h3>How to build eos.js on your own</h3>
+
+    <p>First and second solutions are based on <a href="https://github.com/eosio/eosjs">eosjs library</a>.<br><br>
+        Our plan was, to not include <var>eos.js</var> in our repository and just use a version 13.0.0:<br><br>
+        <code><pre>    &lt;script src="https://github.com/EOSIO/eosjs/releases/download/v13.0.0/eos.js"&gt;&lt;/script&gt;</pre></code><br>
+        which was released in official repository <a href="https://github.com/EOSIO/eosjs/releases/tag/v13.0.0">here</a>. Thanks to that you would not have to trust our eos.js file.<br><br>
+        However the problem appeared when Block One decided to release new version of eos.js (13.1.0), without uploading new build version of eos.js to <a href="https://github.com/EOSIO/eosjs/releases/tag/v13.1.0" target="_blank">released bundle</a> :(<br><br>
+        So, we <a href="https://github.com/EOSIO/eosjs/issues/153" target="_blank">created an issue on official github</a> hopping that they will build and upload newest trusted version of eos.js, so every developer would be able hot-link to it.<br/><br/>
+        But in the meantime, we have been forced to build latest eos.js on our own, so we could publish our solution.
+    </p>
 
     <p>
-        Source code is available at <a href="https://github.com/tokenika/secure-bp-voting">https://github.com/tokenika/secure-bp-voting</a> on <a href="https://raw.githubusercontent.com/tokenika/secure-bp-voting/master/LICENSE">MIT Licence</a>.
+        <b>Important</b>: there is no requirement for your, to trust <var>eos.js</var> build by us. We encourage you, to build it on your own, according to <a href="https://github.com/EOSIO/eosjs#browser" target="_blank">provided official instruction</a>:<br/><br/>
+        <code>
+            <pre>
+    git clone https://github.com/EOSIO/eosjs.git
+    cd eosjs
+    npm install
+    npm run build_browser
+    # builds: ./dist/eos.js
+            </pre>
+        </code>
+    </p>
+
+    <hr>
+
+    <h3>About</h3>
+
+    <p><em>Secure EOS Block Producers Voting</em> is an open-source software created by <a href="https://tokenika.io/" target="_blank">Tokenika.io</a> - an EOS block producer candidate.</p>
+
+    <p>
+        Source code is available at <a href="https://github.com/tokenika/secure-bp-voting" target="_blank">https://github.com/tokenika/secure-bp-voting</a> on <a href="https://raw.githubusercontent.com/tokenika/secure-bp-voting/master/LICENSE" target="_blank">MIT Licence</a>.
     </p>
 
     <p>

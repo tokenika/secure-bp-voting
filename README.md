@@ -23,7 +23,7 @@ This way is a little bit more complicated, but it gives you maximum security. Th
 3. [Pushing transaction to the network](https://tokenika.github.io/secure-bp-voting/3_push_transaction.html)
 
 ## 3. Voting Using the Command Line (for advanced users)
-Of course, there is also a way, to vote with tools provided by Block One. The easiest way to do that require installation of docker. EOS New York recently published very good and detail instruction how this can be done. We can recommend [their article](https://steemit.com/eos/@eosnewyork/your-vote-matters-3-eos-block-producer-voting-using-the-command-line) to all people, which know how to use docker and have some basic command line skils.
+Of course, there is also a way, to vote with tools provided by Block One. The easiest way to do that require installation of docker. EOS New York recently published very good and detail instruction how this can be done. We can recommend [their article](https://steemit.com/eos/@eosnewyork/your-vote-matters-3-eos-block-producer-voting-using-the-command-line) to all people, which know how to use docker and have some basic command line skills.
 
 
 # How to build eos.js on your own
