@@ -49,7 +49,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             if (location.protocol == 'https:') { // Enforce https if served from https, to avoid "mixed content" error
                 document.getElementById('api_endpoint').pattern = '^https://.*';
-                document.getElementById('api_endpoint').title = 'API needs to support https protocol';
+                document.getElementById('api_endpoint').title = 'Since this website is hosted via HTTPS, endpoint API needs to support HTTPS protocol. You can read more about this here: https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content';
             }
         });
     </script>
