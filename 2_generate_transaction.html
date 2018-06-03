@@ -60,15 +60,18 @@
 </head>
 <body>
 
-    <h1>Generate your voting transactions being offline, without a risk of exposing your private key</h1>
+    <h1>Step 2: Generate your voting transaction while being OFF-LINE</h1>
 
+    <p>First of all, save this website to your local machine (right click, <var>Save as…</var>). This can be done in two ways:</p>
+    <ul>
+        <li>MAXIMUM SECURITY: Copy the file to a secure, off-line computer, which was never connected to the internet - this gives you best protection. In this case, you should use a pen drive or an external hard drive to port the file to the off-line machine.</li>
+        <li>LESS SECURE, STILL BETTER THAN ON-LINE: If an off-line, air-gapped computer is not available, disconnect your machine from the internet (switch off wi-fi, network or whatever you're using). This is less secure, as it won't protect you from malware or key loggers that you may already have, but is still way more secure than doing this on-line.</li>
+    </ul>
+    <p>While being <b>OFF-LINE</b> do the following:</p>
     <ol>
-        <li>Save this website to your machine (right click, 'Save as...')</li>
-        <li>While being offline, open saved <var>2_generate_transaction.html</var> in your browser. <br/>
-            For maximum security, you can do this step on a secure offline computer, which was never connected to the internet. <br>
-            Thanks to that, you private key never have to be on device connected to internet, what minimize the risk of being hacked.</li>
-        <li>Fill in all fields. Triple check everything!</li>
-        <li>Copy or write down generated transaction, to push it to the network from connected computer in next step</li>
+        <li>Open the saved <var>2_generate_transaction.html</var> file in your browser. Your private key is at no point exposed to on-line connections, which greatly reduces the risk of getting hacked.</li>
+        <li>Fill in all fields. Triple check everything! For <var>block_num</var> and <var>ref_block_prefix</var> use the data fetched in the previous step.</li>
+        <li>Copy or write down the generated transaction, as you'll need it the subsequent step. Please note that your private key is used to sign transaction, but it is NOT part of the transaction.</li>
     </ol>
     <hr>
     <form action="javascript:generate_transaction()">
@@ -100,7 +103,7 @@
         <textarea id="raw_transaction" style="width: 1000px; height: 400px; font-size: 0.7em;"></textarea>
 
         <p>Copy or write down <var>raw transaction</var> (whitespaces doesn't matter).</p>
-        <p>Next, go to <a href="3_push_transaction.html" target="_blank">step 3</a>, to push this transaction to the network (online).</p>
+        <p>Next, go to <a href="3_push_transaction.html" target="_blank">step 3</a>, to push this transaction to the network (this will be done on-line).</p>
     </div>
 
 </body>

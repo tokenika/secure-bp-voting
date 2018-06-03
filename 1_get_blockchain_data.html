@@ -40,7 +40,10 @@
 </head>
 <body>
 
-    <h1>Load info about the network</h1>
+    <h1>Step 1: Fetch information about the network</h1>
+
+    <p>This initial step needs to be done on-line.</p>
+    <p>The goal of this step is to extract information from the network (<var>block_num</var> and <var>ref_block_prefix</var>), which will be needed in the subsequent step.</p>
 
     <form action="javascript:load()">
         <label for="api_endpoint">API Endpoint</label>
@@ -63,7 +66,7 @@
         <label for="ref_block_prefix">ref_block_prefix</label>
         <input type="text" name="ref_block_prefix" id="ref_block_prefix" value=""><br>
 
-        <p>Copy or write down <var>block_num</var> and <var>ref_block_prefix</var>. You will need this to generate a valid transaction while being offline.</p>
+        <p>Copy or write down <var>block_num</var> and <var>ref_block_prefix</var>. You will need this in the subsequent step to generate a valid transaction while being offline.</p>
         <p>Next, go to <a href="2_generate_transaction.html" target="_blank">step 2</a></p>
     </div>
 

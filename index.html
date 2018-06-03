@@ -1,56 +1,27 @@
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8">
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>README</title></head>
+<body><h1>Secure EOS Block Producer Voting</h1>
+<h2>Rationale</h2>
+<p>It is in the best interest of the entire EOS community to select block producers (a.k.a witnesses) sooner rather than later. The network will not be fully activated until at least 15% of tokens will have voted. And without fully activated network, no transfers or smart-contracts will be possible. At the same time we expect that many bad actors will try to exploit inexperienced users by providing fake voting tools aimed to steal their private keys and then access their EOS tokens.</p>
+<h2>Why off-line?</h2>
+<p>Having the above situation in mind, <a href='https://tokenika.io/'>Tokenika</a> has decided to release a tool offering the possibility of <strong>OFF-LINE</strong> voting for block producers. Contrary to the on-line equivalent, with off-line voting, if done properly, at no point in time is your EOS private key exposed to the outside world. Thus the risk of being hacked is substantially reduced.</p>
+<h2>Three steps</h2>
+<p>The process of off-line voting is divided into three simple steps:</p>
+<ol start='' >
+<li>ON-LINE: <a href='https://tokenika.github.io/secure-bp-voting/1_get_blockchain_data.html'>Fetch information about the network</a></li>
+<li><strong>OFF-LINE</strong>: <a href='https://tokenika.github.io/secure-bp-voting/2_generate_transaction.html'>Generate and sign transaction with your private key</a> </li>
+<li>ON-LINE: <a href='https://tokenika.github.io/secure-bp-voting/3_push_transaction.html'>Push the transaction to the network</a></li>
 
-</head>
-<body style="max-width: 1280px;">
-    <h1>Secure EOS Block Producers Voting</h1>
-
-    <p>
-        This is in best interest of whole EOS community, to select block producers rather sooner than later. Network will not be fully activated if at least 15% of tokens won't vote. Without fully activated network, people will not be able to transfer any funds. At the same time we expect than many bad actors will try to exploit inexperienced users, by providing many tools which could steal your funds.
-    </p>
-    <p>
-        That's why Tokenika decided to release a tool, to give people a possibility to vote being OFFLINE, with no risk of exposing your private keys.
-    </p>
-
-    <h3>Simple online voting (not recommended)</h3>
-
-    <p>Very simpler way to vote, but if your computer was infected by some virus/keylogger in the past, this way cannot guarantee full security.</p>
-
-    <ol>
-        <li><a href="1_vote.html">Simple voting for block producers</a></li>
-    </ol>
-
-    <p>We do not recommend this way, but we release it, because it can be useful in some cases, for example for voting on a testnet.</p>
-
-    <h3>Secure OFFLINE voting (recommended), without a need to use your private key on device being online</h3>
-
-    <p>This way is a little bit more complicated, but it gives you maximum security. The process is divided into 3 steps:</p>
-
-    <ol>
-        <li><a href="1_get_blockchain_data.html">Fetching information about the network</a></li>
-        <li><a href="2_generate_transaction.html">Generating and signing transaction with your private key</a> (you can do this <b>OFFLINE</b>, for example with a computer which was never connected to the internet)</li>
-        <li><a href="3_push_transaction.html">Pushing transaction to the network</a></li>
-    </ol>
-
-    <h3>Voting Using the Command Line (for advanced users)</h3>
-
-    <p>
-        Of course, there is also a way, to vote with tools provided by Block One. The easiest way to do that require installation of docker. EOS New York recently published very good and detail instruction how this can be done. We can recommend <a href="https://steemit.com/eos/@eosnewyork/your-vote-matters-3-eos-block-producer-voting-using-the-command-line" target="_blank">their article</a> to all people, which know how to use docker and have some basic command line skills.
-    </p>
-
-    <hr>
-
-    <h3>About</h3>
-
-    <p><em>Secure EOS Block Producers Voting</em> is an open-source software created by <a href="https://tokenika.io/" target="_blank">Tokenika.io</a> - an EOS block producer candidate.</p>
-
-    <p>
-        Source code is available at <a href="https://github.com/tokenika/secure-bp-voting" target="_blank">https://github.com/tokenika/secure-bp-voting</a> on <a href="https://raw.githubusercontent.com/tokenika/secure-bp-voting/master/LICENSE" target="_blank">MIT Licence</a>.
-    </p>
-
-    <p>
-        <b>We encourage EOS community to audit our code or improve it!</b>
-    </p>
+</ol>
+<p><strong>NOTE:</strong> Step 2 is to be done <strong>OFF-LINE</strong>, ideally on a computer which has never been connected to the Internet.</p>
+<h2>About</h2>
+<p><em>Secure EOS Block Producer Voting</em> is an open-source software created by <a href='https://tokenika.io/'>Tokenika</a>, an EOS block producer candidate. The source code is available at <a href='https://github.com/tokenika/secure-bp-voting' target='_blank' class='url'>https://github.com/tokenika/secure-bp-voting</a> on <a href='https://github.com/tokenika/secure-bp-voting/blob/master/LICENSE'>MIT Licence</a>.</p>
+<h2>Feedback is welcome</h2>
+<p>We encourage the EOS community to audit our code and help us improve it.</p>
+<h2>Legal disclaimer</h2>
+<p>The code in this repository is offered to the EOS community for peer review. Tokenika takes no responsibility for the execution and the results of the execution of this code. This code is provided as is, under <a href='https://github.com/tokenika/secure-bp-voting/blob/master/LICENSE'>MIT Licence</a>.</p>
 </body>
 </html>
