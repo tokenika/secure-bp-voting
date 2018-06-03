@@ -9,7 +9,7 @@
             let account_name = document.getElementById('account_name').value;
             let private_key = document.getElementById('private_key').value;
             let block_producers = document.getElementById('bp').value;
-            block_producers = block_producers.split(',').map(function(s){return s.trim();});
+            block_producers = block_producers.split(',').map(function(s){return s.trim();}).sort();
 
             let expireInSeconds = 60 * document.getElementById('minutes_before_expiration').value;
             let block_num = +document.getElementById('block_num').value;
@@ -102,8 +102,8 @@
         <div>Generated and signed <var>raw transaction</var>:</div>
         <textarea id="raw_transaction" style="width: 1000px; height: 400px; font-size: 0.7em;"></textarea>
 
-        <p>Copy or write down <var>raw transaction</var> (whitespaces doesn't matter).</p>
-        <p>Next, go to <a href="3_push_transaction.html" target="_blank">step 3</a>, to push this transaction to the network (this will be done on-line).</p>
+        <p>Copy or write down the above <var>raw transaction</var> (whitespaces don't matter).</p>
+        <p>Next, go to <a href="3_push_transaction.html" target="_blank">Step 3</a>, to push this transaction to the network.</p>
     </div>
 
 </body>
