@@ -8,6 +8,9 @@ It is in the best interest of the entire EOS community to select block producers
 
 Having the above situation in mind, [Tokenika](https://tokenika.io/) has decided to release a tool offering the possibility of **OFF-LINE** voting for block producers. Contrary to the on-line equivalent, with off-line voting, if done properly, at no point in time is your EOS private key exposed to the outside world. Thus the risk of being hacked is substantially reduced.
 
+## How it works?
+The main idea is to generate a voting transaction while being completely off-line and make sure the private key is used only for signing the transaction and is never exposed afterwards. The actual signing and key handling process uses only official EOSIO unmodified codebase. Thus the `eos.js` library is the only external dependency, while the rest of the code is pretty short and simple.
+
 ## Three steps
 
 The process of off-line voting is divided into three simple steps:
@@ -18,13 +21,17 @@ The process of off-line voting is divided into three simple steps:
 
 **NOTE:** Step 2 is to be done **OFF-LINE**, ideally on a computer which has never been connected to the Internet.
 
+## Explainer video
+
+And [here's an explainer video](https://youtu.be/_sJYuXOUHCc) shot by [noisy](https://github.com/noisy), the lead developer of this tool.
+
 ## About
 
-*Secure EOS Block Producer Voting* is an open-source software created by [Tokenika](https://tokenika.io/), an EOS block producer candidate. The source code is available at <https://github.com/tokenika/secure-bp-voting> on [MIT Licence](https://github.com/tokenika/secure-bp-voting/blob/master/LICENSE).
+*Secure EOS Block Producer Voting* is an open-source software created by [Tokenika](https://tokenika.io/), an EOS block producer candidate. The source code is available at [https://github.com/tokenika/secure-bp-voting](https://github.com/tokenika/secure-bp-voting) on [MIT Licence](https://github.com/tokenika/secure-bp-voting/blob/master/LICENSE).
 
 ## Feedback is welcome
 
-We encourage the EOS community to audit our code and help us improve it.
+We encourage the EOS community to audit our code and help us improve it. The source code is quite concise, so for anyone qualified it should not pose a problem to go through it. We would appreciate your comments if you find anything that needs our attention. 
 
 ## Legal disclaimer
 
