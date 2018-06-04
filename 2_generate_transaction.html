@@ -9,7 +9,11 @@
             let account_name = document.getElementById('account_name').value;
             let private_key = document.getElementById('private_key').value;
             let block_producers = document.getElementById('bp').value;
-            block_producers = block_producers.split(',').map(function(s){return s.trim();}).sort();
+            block_producers = block_producers.split(',').map(
+		function(s){return s.trim();}
+	    ).sort(
+	        function(a, b){return parseInt(Eos.modules.format.encodeName(a, false)) - parseInt(Eos.modules.format.encodeName(b, false));}
+	    );
 
             let expireInSeconds = 60 * document.getElementById('minutes_before_expiration').value;
             let block_num = +document.getElementById('block_num').value;
