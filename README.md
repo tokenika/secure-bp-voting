@@ -13,11 +13,13 @@ The main idea is to generate a voting transaction while being completely off-lin
 
 ## Three steps
 
-The process of off-line voting is divided into three simple steps:
+The process of off-line voting is divided into three simple steps, each of them in the form of an HTML page served from the `tokenika.github.io` domain:
 
 1. ON-LINE: [Fetch information about the network](https://tokenika.github.io/secure-bp-voting/1_get_blockchain_data.html)
 2. **OFF-LINE**: [Generate and sign transaction with your private key](https://tokenika.github.io/secure-bp-voting/2_generate_transaction.html) 
 3. ON-LINE: [Push the transaction to the network](https://tokenika.github.io/secure-bp-voting/3_push_transaction.html)
+
+**NOTE:** Please make sure the URL always starts with `https://tokenika.github.io/secure-bp-voting`.
 
 **NOTE:** Step 2 is to be done **OFF-LINE**, ideally on a computer which has never been connected to the Internet.
 
