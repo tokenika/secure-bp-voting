@@ -14,11 +14,6 @@
             ).sort(
                 function(a, b){return parseInt(Eos.modules.format.encodeName(a, false)) - parseInt(Eos.modules.format.encodeName(b, false));}
             );
-
-            let main_token_symbol = 'EOS';
-            let stake_net_quantity = document.getElementById('stake_net_quantity').value;
-            let stake_cpu_quantity = document.getElementById('stake_cpu_quantity').value;
-
             let expireInSeconds = 60 * document.getElementById('minutes_before_expiration').value;
             let block_num = +document.getElementById('block_num').value;
             let chainId = document.getElementById('chainId').value;
@@ -54,14 +49,6 @@
 
             EOS.transaction(
                 function(tr){
-                    tr.delegatebw({
-                        'from': account_name,
-                        'receiver': account_name,
-                        'stake_net_quantity': stake_net_quantity.toString() + ' ' + main_token_symbol,
-                        'stake_cpu_quantity': stake_cpu_quantity.toString() + ' ' + main_token_symbol,
-                        'transfer': 0
-                    });
-
                     tr.voteproducer({
                         'voter': account_name,
                         'proxy': '',
@@ -122,16 +109,6 @@
 
         <label for="minutes_before_expiration">Transaction will expire in</label>
         <input type="number" min="1" max="60" step="1" name="minutes_before_expiration" id="minutes_before_expiration" value="10" required> minutes<br>
-
-        <h3>Staking</h3>
-
-        <label for="stake_net_quantity">Stake Net Quantity</label>
-        <input type="number" min="0" step="1" name="stake_net_quantity" id="stake_net_quantity" value="0" required> EOS<br>
-
-        <label for="stake_cpu_quantity">Stake CPU Quantity</label>
-        <input type="number" min="0" step="1" name="stake_cpu_quantity" id="stake_cpu_quantity" value="0" required> EOS<br>
-
-        <h3>Voting</h3>
 
         <label for="bp">Block Producers</label>
         <input type="text" name="bp" id="bp" value="" style="width: 700px;" placeholder="Coma separated list of block producers account names (no more than 30). Example: alpha, beta, gamma" required><br>
