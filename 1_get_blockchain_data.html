@@ -2,7 +2,7 @@
 <head>
     <meta charset="utf-8">
 
-    <script src="https://github.com/EOSIO/eosjs/releases/download/v13.1.0/eos.js"></script>
+    <script src="https://github.com/EOSIO/eosjs/releases/download/v14.1.1/eos.js"></script>
 
     <script>
         function handle_error(error) {
@@ -14,12 +14,13 @@
 
             api_endpoint = api_endpoint.replace(/\/$/, ""); //remove trailing slash
 
-            eos = Eos.Localnet({httpEndpoint: api_endpoint});
+            eos = Eos({httpEndpoint: api_endpoint});
 
             eos.getInfo({}).then(function(result){
 
                 document.getElementById('loaded_info').style.display = 'block';
                 document.getElementById('network_info').innerText = JSON.stringify(result, null, "    ");
+                document.getElementById('chain_id').value = result.chain_id;
 
                 eos.getBlock(result.last_irreversible_block_num).then(
                     function(result){
@@ -43,7 +44,7 @@
     <h1>Step 1: Fetch information about the network</h1>
 
     <p>This initial step needs to be done on-line.</p>
-    <p>The goal of this step is to extract information from the network (<var>block_num</var> and <var>ref_block_prefix</var>), which will be needed in the subsequent step.</p>
+    <p>The goal of this step is to extract information from the network (<var>chain_id</var>, <var>block_num</var> and <var>ref_block_prefix</var>), which will be needed in the subsequent step.</p>
 
     <form action="javascript:load()">
         <label for="api_endpoint">API Endpoint</label>
@@ -60,13 +61,16 @@
 
         <hr>
 
+        <label for="chain_id">chain_id</label>
+        <input type="text" name="chain_id" id="chain_id" value="" style="width: 500px"><br>
+
         <label for="block_num">block_num</label>
         <input type="text" name="block_num" id="block_num" value=""><br>
 
         <label for="ref_block_prefix">ref_block_prefix</label>
         <input type="text" name="ref_block_prefix" id="ref_block_prefix" value=""><br>
 
-        <p>Copy or write down <var>block_num</var> and <var>ref_block_prefix</var>. You will need those in the subsequent step to generate a valid transaction while being off-line.</p>
+        <p>Copy or write down <var>chain_id</var>, <var>block_num</var> and <var>ref_block_prefix</var>. You will need those in the subsequent step to generate a valid transaction while being off-line.</p>
         <p>Next, go to <a href="2_generate_transaction.html" target="_blank">Step 2</a> to generate a transaction.</p>
     </div>
 
