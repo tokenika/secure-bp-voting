@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script src="https://github.com/EOSIO/eosjs/releases/download/v13.1.0/eos.js"></script>
+    <script src="https://github.com/EOSIO/eosjs/releases/download/v14.1.1/eos.js"></script>
 
     <script>
 
@@ -10,13 +10,18 @@
             let private_key = document.getElementById('private_key').value;
             let block_producers = document.getElementById('bp').value;
             block_producers = block_producers.split(',').map(
-		function(s){return s.trim();}
-	    ).sort(
-	        function(a, b){return parseInt(Eos.modules.format.encodeName(a, false)) - parseInt(Eos.modules.format.encodeName(b, false));}
-	    );
+                function(s){return s.trim();}
+            ).sort(
+                function(a, b){return parseInt(Eos.modules.format.encodeName(a, false)) - parseInt(Eos.modules.format.encodeName(b, false));}
+            );
+
+            let main_token_symbol = document.getElementById('main_token_symbol').value;
+            let stake_net_quantity = document.getElementById('stake_net_quantity').value;
+            let stake_cpu_quantity = document.getElementById('stake_cpu_quantity').value;
 
             let expireInSeconds = 60 * document.getElementById('minutes_before_expiration').value;
             let block_num = +document.getElementById('block_num').value;
+            let chainId = document.getElementById('chainId').value;
             let ref_block_num = block_num & 0xFFFF;
             let ref_block_prefix = +document.getElementById('ref_block_prefix').value;
 
@@ -26,26 +31,42 @@
                 authorization: account_name
             };
 
-            Eos.Localnet({
+            let headers = {
+                ref_block_num: ref_block_num,
+                ref_block_prefix: ref_block_prefix,
+                expiration: new Date(new Date().getTime() + expireInSeconds * 1000).toISOString().split('.')[0],
+                net_usage_words: 0,
+                max_cpu_usage_ms: 0,
+                delay_sec: 0
+            };
+
+            let EOS = Eos({
                 keyProvider: private_key,
                 transactionHeaders: function(_, callback) {
-                    callback(null, {
-                        ref_block_num: ref_block_num,
-                        ref_block_prefix: ref_block_prefix,
-                        expiration: new Date(new Date().getTime() + expireInSeconds * 1000).toISOString().split('.')[0],
-                        net_usage_words: 0,
-                        max_cpu_usage_ms: 0,
-                        delay_sec: 0
-                    })
+                    callback(null, headers)
                 },
-            })
-            .transaction(
+                broadcast: false,
+                sign: true,
+                chainId: chainId,
+                // checkChainId: false - enable after merge of https://github.com/EOSIO/eosjs/pull/179
+            });
+
+
+            EOS.transaction(
                 function(tr){
+                    tr.delegatebw({
+                        'from': account_name,
+                        'receiver': account_name,
+                        'stake_net_quantity': stake_net_quantity.toString() + ' ' + main_token_symbol,
+                        'stake_cpu_quantity': stake_cpu_quantity.toString() + ' ' + main_token_symbol,
+                        'transfer': 0
+                    });
+
                     tr.voteproducer({
                         'voter': account_name,
                         'proxy': '',
                         'producers': block_producers
-                    })
+                    });
                 },
                 options
             )
@@ -74,7 +95,7 @@
     <p>While being <b>OFF-LINE</b> do the following:</p>
     <ol>
         <li>Open the saved <var>2_generate_transaction.html</var> file in your browser. Your private key is at no point exposed to on-line connections, which greatly reduces the risk of getting hacked.</li>
-        <li>Fill in all fields. Triple check everything! For <var>block_num</var> and <var>ref_block_prefix</var> use the data fetched in the previous step.</li>
+        <li>Fill in all fields. Triple check everything! For <var>chain_id</var>, <var>block_num</var> and <var>ref_block_prefix</var> use the data fetched in the previous step.</li>
         <li>Copy or write down the generated transaction, as you'll need it in the subsequent step. Please note that your private key is used to sign transaction, but it's NOT part of the transaction.</li>
     </ol>
     <hr>
@@ -87,8 +108,8 @@
         <label for="private_key">Private Key</label>
         <input type="text" name="private_key" id="private_key" value="" style="width: 700px;" required><br>
 
-        <label for="bp">Block Producers</label>
-        <input type="text" name="bp" id="bp" value="" style="width: 700px;" placeholder="Coma separated list of block producers account names (no more than 30). Example: alpha, beta, gamma" required><br>
+        <label for="chainId"><var>chainId</var></label>
+        <input type="text" name="chainId" id="chainId" value="" required style="width: 500px"><br>
 
         <label for="block_num"><var>block_num</var></label>
         <input type="text" name="block_num" id="block_num" value="" required><br>
@@ -98,6 +119,27 @@
 
         <label for="minutes_before_expiration">Minutes before transaction will expire</label>
         <input type="text" name="minutes_before_expiration" id="minutes_before_expiration" value="10" required><br>
+
+        <h3>Staking</h3>
+
+        <label for="main_token_symbol">Main Token Symbol</label>
+        <input type="text" name="main_token_symbol" id="main_token_symbol" value="EOS" list="defaultURLs" required><br>
+
+        <datalist id="defaultURLs">
+            <option value="SYS">
+            <option value="EOS">
+        </datalist>
+
+        <label for="stake_net_quantity">Stake Net Quantity</label>
+        <input type="number" min="0" step="1" name="stake_net_quantity" id="stake_net_quantity" value="0" required><br>
+
+        <label for="stake_cpu_quantity">Stake CPU Quantity</label>
+        <input type="number" min="0" step="1" name="stake_cpu_quantity" id="stake_cpu_quantity" value="0" required><br>
+
+        <h3>Voting</h3>
+
+        <label for="bp">Block Producers</label>
+        <input type="text" name="bp" id="bp" value="" style="width: 700px;" placeholder="Coma separated list of block producers account names (no more than 30). Example: alpha, beta, gamma" required><br>
 
         <input type="submit" value="Generate transaction">
     </form>
