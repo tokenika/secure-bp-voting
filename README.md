@@ -27,6 +27,8 @@ The process of off-line voting is divided into three simple steps, each of them 
 
 And [here's an explainer video](https://youtu.be/_sJYuXOUHCc) shot by [noisy](https://github.com/noisy), the lead developer of this tool.
 
+[![](video_instruction_thumbnail.png)](https://www.youtube.com/watch?v=_sJYuXOUHCc)
+
 ## About
 
 *Secure EOS Block Producer Voting* is an open-source software created by [Tokenika](https://tokenika.io/), an EOS block producer candidate. The source code is available at [https://github.com/tokenika/secure-bp-voting](https://github.com/tokenika/secure-bp-voting) on [MIT Licence](https://github.com/tokenika/secure-bp-voting/blob/master/LICENSE). A HTML version of this document is also available under this URL: [https://tokenika.github.io/secure-bp-voting](https://tokenika.github.io/secure-bp-voting).
