@@ -3,6 +3,10 @@
     <meta charset="utf-8">
 
     <script src="https://github.com/EOSIO/eosjs/releases/download/v14.1.1/eos.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet"  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" >
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
     <script>
         function handle_error(error) {
@@ -15,6 +19,7 @@
             api_endpoint = api_endpoint.replace(/\/$/, ""); //remove trailing slash
 
             eos = Eos({httpEndpoint: api_endpoint});
+            var table = $('#block_producers_table').DataTable();
 
             eos.getInfo({}).then(function(result){
 
@@ -29,6 +34,26 @@
                     }
                 )
             }, handle_error);
+            
+            // populate the block producer table 
+            eos.getProducers({"json":true, "limit":200}).then(function(result){ 
+
+                bps = result.rows
+                for (var i = 0; i< bps.length; i++){
+                    checkbox = '<input type="checkbox" name="id[]" value="' + bps[i].owner + '">'
+                    table.row.add([checkbox, bps[i].owner,bps[i].url,bps[i].total_votes])
+                }
+                table.draw()
+
+                selected_bps = [];
+                $("input[type='checkbox']").on('change',function() {
+                    if(this.checked){
+                        selected_bps.push($(this).val());
+                    }
+                    $('#block_producers').val(selected_bps.join(","));
+                });
+            });
+
         }
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -37,6 +62,7 @@
                 document.getElementById('api_endpoint').title = 'Since this website is hosted via HTTPS, endpoint API needs to support HTTPS protocol. You can read more about this here: https://developer.mozilla.org/en-US/docs/Web/Security/Mixed_content';
             }
         });
+
     </script>
 </head>
 <body>
@@ -73,8 +99,28 @@
         <label for="ref_block_prefix">ref_block_prefix</label>
         <input type="text" name="ref_block_prefix" id="ref_block_prefix" value=""><br>
 
+
+        <!-- populated on click on the table of bps -->
+        <label for="block_producers">block_producers</label>
+        <input type="text" name="block_producers" id="block_producers" value=""><br>
+
         <p>Copy or write down <var>chain_id</var>, <var>block_num</var> and <var>ref_block_prefix</var>. You will need those in the subsequent step to generate a valid transaction while being off-line.</p>
         <p>Next, go to <a href="2_generate_transaction.html" target="_blank">Step 2</a> to generate a transaction.</p>
+
+        <!-- Table for block producers details - search and multiselect -->
+        <table id="block_producers_table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Owner</th>
+                    <th>URL</th>
+                    <th>Total Votes</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
     </div>
 
 </body>
