@@ -54,7 +54,8 @@
     <p>This is the final step and it needs to be done on-line.</p>
     <p>The goal is to push to the network the <var>raw transaction</var> which was generated in the previous step.</p>
     <p>It's safe to be done on-line, as this transaction does NOT contain your private key.</p>
-
+    <p>Select an endpoint, paste the transaction in the box below, make sure you've switched back to being on-line, and then press <var>Send</var>.</p>
+    <hr>
     <form action="javascript:send()">
         <label for="api_endpoint">API Endpoint</label>
         <input type="url" name="api_endpoint" id="api_endpoint" value="" list="defaultURLs" style="width: 300px;" required>
@@ -68,8 +69,8 @@
         <br>
 
         <label for="api_endpoint"><var>Raw transaction</var></label><br>
-        <textarea id="raw_transaction" style="width: 1000px; height: 400px; font-size: 0.7em" required></textarea><br/>
-        <input type="submit" value="Send transaction to the network">
+        <textarea id="raw_transaction" style="width: 1000px; height: 600px;" required></textarea><br/>
+        <input type="submit" value="Send transaction to the network" style="width: 250px">
     </form>
 
     <div id="response" style="display: none">
@@ -79,9 +80,10 @@
 
         <div style="width: 1000px; overflow: auto;">
             <code>
-                <pre id="result" style="font-size: 0.7em;"></pre>
+                <pre id="result"></pre>
             </code>
         </div>
+        <p>To make sure your vote has been successfully cast, please refer to <a href="http://eosflare.io/account" target="_blank">this website</a> and paste your EOS account name there.</p>
     </div>
 
 </body>
