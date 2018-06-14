@@ -15,10 +15,10 @@
                 function(a, b){return parseInt(Eos.modules.format.encodeName(a, false)) - parseInt(Eos.modules.format.encodeName(b, false));}
             );
             let expireInSeconds = 60 * document.getElementById('minutes_before_expiration').value;
-            let block_num = +document.getElementById('block_num').value;
+            let block_num = document.getElementById('block_num').value;
             let chainId = document.getElementById('chainId').value;
             let ref_block_num = block_num & 0xFFFF;
-            let ref_block_prefix = +document.getElementById('ref_block_prefix').value;
+            let ref_block_prefix = document.getElementById('ref_block_prefix').value;
 
             let options = {
                 broadcast: false,
