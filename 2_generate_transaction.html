@@ -77,48 +77,51 @@
 
     <h1>Step 2: Generate your voting transaction while being OFF-LINE</h1>
 
-    <p>First of all, save this website to your local machine (right click, <var>Save as…</var>). This can be done in two ways:</p>
+    <p>First of all, save this website to your local machine (right click and then choose <var>Save as…</var>).</p>
+    <p>Next, make sure you know your EOS account name. If you are not sure what it is, <a href="https://eosauthority.com/account" target="_blank">use the value extracted from your public key</a>.</p>
+    <p>Then proceed by choosing one of the following options:</p>
     <ul>
         <li>MAXIMUM SECURITY: Copy the file to a secure, off-line computer, which has never been connected to the internet - this gives you best protection. In this case, you should use a pen drive or an external hard drive to port the file to the off-line machine.</li>
-        <li>LESS SECURE, STILL BETTER THAN ON-LINE: If an off-line, air-gapped computer is not available, disconnect your machine from the internet (switch off wi-fi, network or whatever you're using). This is less secure, as it won't protect you from malware or key loggers that you may already have, but is still way more secure than doing this on-line.</li>
+        <li>LESS SECURE, STILL MUCH BETTER THAN ON-LINE: If an off-line, air-gapped computer is not available, disconnect your machine from the internet (switch off wi-fi, network or whatever you're using). This is less secure, as it won't protect you from malware or key loggers that you may already have, but is still way more secure than doing this on-line.</li>
     </ul>
     <p>While being <b>OFF-LINE</b> do the following:</p>
     <ol>
         <li>Open the saved <var>2_generate_transaction.html</var> file in your browser. Your private key is at no point exposed to on-line connections, which greatly reduces the risk of getting hacked.</li>
         <li>Fill in all fields. Triple check everything! For <var>chain_id</var>, <var>block_num</var> and <var>ref_block_prefix</var> use the data fetched in the previous step.</li>
-        <li>Copy or write down the generated transaction, as you'll need it in the subsequent step. Please note that your private key is used to sign transaction, but it's NOT part of the transaction.</li>
+        <li>Copy or write down the generated transaction, as you'll need it in the subsequent step. Please note that your private key is used to sign the transaction, but it's NOT part of the transaction.</li>
     </ol>
     <hr>
     <form action="javascript:generate_transaction()">
 
-        <label for="account_name">Your Account Name</label>
-        <input type="text" name="account_name" id="account_name" value="" required><br/>
+        <div style="width: 850px; text-align: right">
+            <label for="account_name">Your EOS Account Name</label>
+            <input type="text" name="account_name" id="account_name" value="" style="width: 600px;" required><br/>
 
+            <label for="private_key">Your EOS Private Key</label>
+            <input type="text" name="private_key" id="private_key" value="" style="width: 600px;" required><br>
 
-        <label for="private_key">Private Key</label>
-        <input type="text" name="private_key" id="private_key" value="" style="width: 700px;" required><br>
+            <label for="chainId"><var>chain_id</var></label>
+            <input type="text" name="chainId" id="chainId" value="" required style="width: 600px"><br>
 
-        <label for="chainId"><var>chainId</var></label>
-        <input type="text" name="chainId" id="chainId" value="" required style="width: 500px"><br>
+            <label for="block_num"><var>block_num</var></label>
+            <input type="text" name="block_num" id="block_num" value="" style="width: 600px;" required><br>
 
-        <label for="block_num"><var>block_num</var></label>
-        <input type="text" name="block_num" id="block_num" value="" required><br>
+            <label for="ref_block_prefix"><var>ref_block_prefix</var></label>
+            <input type="text" name="ref_block_prefix" id="ref_block_prefix" value="" style="width: 600px;" required><br>
 
-        <label for="ref_block_prefix"><var>ref_block_prefix</var></label>
-        <input type="text" name="ref_block_prefix" id="ref_block_prefix" value="" required><br>
+            <label for="minutes_before_expiration">Transaction expiration (in minutes)</label>
+            <input type="number" min="1" max="60" step="1" name="minutes_before_expiration" id="minutes_before_expiration" value="10" style="width: 600px;" required><br>
 
-        <label for="minutes_before_expiration">Transaction will expire in</label>
-        <input type="number" min="1" max="60" step="1" name="minutes_before_expiration" id="minutes_before_expiration" value="10" required> minutes<br>
-
-        <label for="bp">Block Producers</label>
-        <input type="text" name="bp" id="bp" value="" style="width: 700px;" placeholder="Coma separated list of block producers account names (no more than 30). Example: alpha, beta, gamma" required><br>
-
-        <input type="submit" value="Generate transaction">
+            <label for="bp">Block Producers You Vote For</label>
+            <input type="text" name="bp" id="bp" value="" style="width: 600px;" placeholder="Coma-separated list of BP account names (no more than 30). Example: alpha, beta, gamma" required><br>
+        </div>
+        <hr>
+        <input type="submit" value="Generate transaction" style="width: 180px">
     </form>
 
     <div id="transaction" style="display: none">
         <div>Generated and signed <var>raw transaction</var>:</div>
-        <textarea id="raw_transaction" style="width: 1000px; height: 400px; font-size: 0.7em;"></textarea>
+        <textarea id="raw_transaction" style="width: 1000px; height: 600px;"></textarea>
 
         <p>Copy or write down the above <var>raw transaction</var> (whitespaces don't matter).</p>
         <p>Next, go to <a href="3_push_transaction.html" target="_blank">Step 3</a>, to push this transaction to the network.</p>
